@@ -4,6 +4,7 @@ Executing a command inside a shell implies creating a new process, which executi
 This set of functions will be the key to success for your Minishell, so be sure to code the cleanest, simplest program possible.  
 Otherwise, you’ll probably have to start from scratch for your 21sh project and that would be a real shame.
 
-For more info about the project [click here]()
+For more info about the project [click here](https://github.com/oulhafiane/1337-42-minishell/blob/master/resources/minishell.en.pdf)
 
-## Video
+## Video On Youtube
+[![1337-42-minishell](https://github.com/oulhafiane/1337-42-minishell/blob/master/resources/screenshot.png?raw=true)](https://youtu.be/xUfdQHEYh1w)
