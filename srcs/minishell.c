@@ -6,7 +6,7 @@
 /*   By: zoulhafi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/21 01:27:30 by zoulhafi          #+#    #+#             */
-/*   Updated: 2019/01/23 13:25:13 by zoulhafi         ###   ########.fr       */
+/*   Updated: 2019/01/26 17:39:29 by zoulhafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	minishell(t_list *lst, t_list **env)
 	char	**cmds;
 	t_list	*bltin;
 
-	while (ft_printf("$> ") > 0 && get_next_line(0, &cmd) == 1)
+	while (ft_printf("\033[32;1mMy_Minishell $>\033[0m ") > 0 && get_next_line(0, &cmd) == 1)
 	{
 		if (fix_line(&cmd, *env) == 1)
 		{
