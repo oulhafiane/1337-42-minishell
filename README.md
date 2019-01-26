@@ -1,2 +1,9 @@
 # 1337-42-minishell
-Summary: The objective of this project is for you to create the simplest start of a shell script. Shell is beautiful! Isn’t there a famous saying? “As beautiful as Shell?” Thanks to all the shell projects, you will connect with the infinite power of Mankind Intelligence (Not even sure that you deserve it, but I have been forced to do so, so here we are. . . ).
+Through the Minishell project, you will get to the core of the Unix system and explore an important part of this system’s API: process creation and synchronisation.  
+Executing a command inside a shell implies creating a new process, which execution and final state will be monitored by its parent’s process.  
+This set of functions will be the key to success for your Minishell, so be sure to code the cleanest, simplest program possible.  
+Otherwise, you’ll probably have to start from scratch for your 21sh project and that would be a real shame.
+
+For more info about the project [click here]()
+
+## Video
