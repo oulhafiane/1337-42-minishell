@@ -100,6 +100,10 @@ void	minishell(t_list *lst, t_list **env)
 	}
 }
 
+/*
+**	The Main Function of Minishell
+*/
+
 int		main(int ac, char **av, char **ev)
 {
 	t_list		*env;
