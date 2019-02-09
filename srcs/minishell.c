@@ -12,6 +12,15 @@
 
 #include "minishell.h"
 
+/*
+**	The Fork Function
+**	it creates a copy (child process) of the current process (parent process)
+**	man fork -> for more info.
+**	after that there will be two processes one is parent and the other is child
+**	the child executes the cmds with the environment given on the parameters
+**	the parent waits the child to finish
+*/
+
 void	forkit(char *full_path, char **cmds, t_list **env)
 {
 	int		status;
@@ -29,6 +38,14 @@ void	forkit(char *full_path, char **cmds, t_list **env)
 		execve(full_path, cmds, env_tab);
 }
 
+/*
+**	the command given need to be executed without searching in $PATH
+**	because it's have with it the path like : /bin/ls
+**	the function check if it's exist and it's permission to execute is OK
+**	then sends it to forkit function 
+**	otherwise, it prints an error msg.
+*/
+
 void	exec_local(char **cmds, t_list **env)
 {
 	if (access(*cmds, F_OK) == 0)
@@ -41,6 +58,13 @@ void	exec_local(char **cmds, t_list **env)
 	else
 		ft_printf_fd(2, "%s: Command not found.\n", *cmds);
 }
+
+/*
+**	the command given to be search in all paths stored in environment variable $PATH
+**	then if it's exist it checks it's permission to execute
+**	then sends it to forkit function
+**	otherwise, it prints an error msg.
+*/
 
 void	exec_cmd(char **cmds, char **path, t_list **env)
 {
@@ -70,6 +94,20 @@ void	exec_cmd(char **cmds, char **path, t_list **env)
 	}
 	ft_free_strtab(head_path);
 }
+
+/*
+**	The loop function of minishell
+**	it prints the minishell msg : My_Minishell $>
+**	and reads from the input standard the command
+**	and check it which type is it : exit, builtins, Cmd with path, Cmd Without Path
+**	and sends the list of agruments to appropriate function.
+**	
+**	Notes : (libft functions)
+**	get_next_line  : reads a line from the standard input.
+**	ft_strsplit_ws : splits a line to a multiple words by whitespace delimiters
+**			 returns a char** and last pointer is NULL.
+**	free_strtab    : frees all strings (char**) returned by ft_strsplit_ws. 
+*/
 
 void	minishell(t_list *lst, t_list **env)
 {
@@ -102,6 +140,9 @@ void	minishell(t_list *lst, t_list **env)
 
 /*
 **	The Main Function of Minishell
+**	it initiates the builtins and environment lists,
+**	after calls the loop function of minishell,
+**	after frees all memory allocated on the heap
 */
 
 int		main(int ac, char **av, char **ev)
