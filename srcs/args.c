@@ -12,6 +12,11 @@
 
 #include "minishell.h"
 
+/*
+**	called from remove_quotes
+**	needed to check how many quotes stored in the string.
+*/
+
 static int		count_char_to_remove(char *str)
 {
 	int		count;
@@ -37,7 +42,12 @@ static int		count_char_to_remove(char *str)
 	return (count);
 }
 
-void			remove_quotes(char **str)
+/*
+**	called from fix_line,
+**	needed to remove all quotes stored in the line ' or "
+*/
+
+static void		remove_quotes(char **str)
 {
 	char	*new;
 	char	*cpy;
@@ -64,6 +74,12 @@ void			remove_quotes(char **str)
 	*str = new;
 }
 
+/*
+**	called from check_vars and fix_line functions,
+**	to get and return the first value stored in the string
+**	that start with $.
+*/
+
 static char		*get_value(char *str)
 {
 	char	*value;
@@ -85,7 +101,13 @@ static char		*get_value(char *str)
 	return (NULL);
 }
 
-int				check_vars(char *str, t_list *env)
+/*
+**	called from fix_line function,
+**	needed to check if all environment variables
+**	in the line command exists ($PATH for example).
+*/
+
+static int		check_vars(char *str, t_list *env)
 {
 	char	*value;
 	char	*env_value;
@@ -104,7 +126,15 @@ int				check_vars(char *str, t_list *env)
 	return (1);
 }
 
-int				fix_line(char **line, t_list *env)
+/*
+**	this function called from minishell loop function,
+**	needed to check if the line command have a $ in it
+**	that mean that a Envionment varibale to printed instead of $VAR
+**	it check first if all variable already stored in the t_list of t_env elements,
+**	after that it replaces the $VARS by their values.
+*/
+
+int			fix_line(char **line, t_list *env)
 {
 	char	*value;
 	char	*env_value;

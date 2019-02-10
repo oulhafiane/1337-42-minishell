@@ -12,7 +12,13 @@
 
 #include "minishell.h"
 
-void	add_builtin(t_list **lst, char *cmd, void (*f)())
+/*
+**	called from init_builtin,
+**	it create a new element of struct t_builtin and fill it,
+**	and call ft_lstadd libft function to add this element to the list
+*/
+
+static void	add_builtin(t_list **lst, char *cmd, void (*f)())
 {
 	t_builtin	*elem;
 
@@ -23,7 +29,13 @@ void	add_builtin(t_list **lst, char *cmd, void (*f)())
 	ft_lstadd(lst, ft_lstnew(elem, 0));
 }
 
-void	init_builtin(t_list **lst)
+/*
+**	function that initiates the builtins commands
+**	it adds struct t_builtin elements to the list by calling add_builtin
+**	struct t_builtin have a name and a function check minishell.h
+*/
+
+void		init_builtin(t_list **lst)
 {
 	add_builtin(lst, "echo", &ft_echo);
 	add_builtin(lst, "cd", &ft_cd);
@@ -33,6 +45,12 @@ void	init_builtin(t_list **lst)
 	add_builtin(lst, "unsetenv", &ft_unsetenv);
 }
 
+/*
+**	this function needed by ft_lstsearch libft function 
+**	that called from minishell loop function
+**	to check if the command is a builtin function or not
+*/
+
 int		check_builtin(t_list *elem, void *obj)
 {
 	if (ft_strcmp(((t_builtin*)elem->content)->cmd, (char*)obj) == 0)
@@ -41,7 +59,12 @@ int		check_builtin(t_list *elem, void *obj)
 		return (0);
 }
 
-void	free_builtin(t_list *lst)
+/*
+**	it frees all memory allocated in the heap created by add_builtin
+**	and frees the t_list element.
+*/
+
+void		free_builtin(t_list *lst)
 {
 	t_list		*previous;
 

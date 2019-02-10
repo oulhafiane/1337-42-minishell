@@ -12,6 +12,10 @@
 
 #include "minishell.h"
 
+/*
+**	a builtin command, that print the arguments passed as parameter **args.
+*/
+
 void		ft_echo(char **args, t_list **env)
 {
 	(void)env;

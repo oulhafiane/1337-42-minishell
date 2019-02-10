@@ -12,7 +12,13 @@
 
 #include "minishell.h"
 
-char	*get_env_value(char *name, t_list *lst)
+/*
+**	needed by many functions,
+**	it get the variabled named with char *name given on parameter
+**	from the list t_list that contains all t_env elements.
+*/
+
+char		*get_env_value(char *name, t_list *lst)
 {
 	t_env	*env;
 
@@ -26,7 +32,11 @@ char	*get_env_value(char *name, t_list *lst)
 	return (NULL);
 }
 
-int		check_setenv_args(char **args, t_list **lst)
+/*
+**	check usage of setenv builtin command.
+*/
+
+static int	check_setenv_args(char **args, t_list **lst)
 {
 	if (ft_strtablen(args) > 2)
 	{
@@ -52,7 +62,12 @@ int		check_setenv_args(char **args, t_list **lst)
 	return (1);
 }
 
-void	ft_setenv(char **args, t_list **lst)
+/*
+**	a builtin command, it add new environment variable
+**	to the list t_list that contains t_env elements.
+*/
+
+void		ft_setenv(char **args, t_list **lst)
 {
 	t_list	*cpy;
 	t_env	*env;
@@ -74,7 +89,12 @@ void	ft_setenv(char **args, t_list **lst)
 	add_env(lst, args[0], args[1], 1);
 }
 
-void	ft_unsetenv(char **args, t_list **lst)
+/*
+**	a builtin command, it removes all variables stored in **args
+**	from the list t_list that contains t_env elements.
+*/
+
+void		ft_unsetenv(char **args, t_list **lst)
 {
 	t_list	*cpy;
 	t_list	*previous;
@@ -102,7 +122,11 @@ void	ft_unsetenv(char **args, t_list **lst)
 	}
 }
 
-void	ft_env(char **args, t_list **lst)
+/*
+**	a builtin command, it prints all environment variables
+*/
+
+void		ft_env(char **args, t_list **lst)
 {
 	t_list	*cpy;
 	t_env	*env;

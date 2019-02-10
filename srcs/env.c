@@ -12,6 +12,13 @@
 
 #include "minishell.h"
 
+/*
+**	this function get the element called PATH 
+**	from the list that contains t_env elements
+**	and split it with the delimited :
+**	to get an array of strings containing all paths.
+*/
+
 char	**get_path(t_list *env)
 {
 	t_env	*tmp;
@@ -26,6 +33,14 @@ char	**get_path(t_list *env)
 	return (ft_strsplit("", ';'));
 }
 
+/*
+**	called from init_env, and other functions from ft_cd.c and ft_env.c,
+**	it create a new element of struct t_env and fill it,
+**	and call ft_lstadd libft function to add this element to the list
+**	the variable end, it have a boolean value 0 or 1
+**	that needed to check to add the element at the end of list or the beginning.
+*/
+
 void	add_env(t_list **lst, char *name, char *value, int end)
 {
 	t_env	*elem;
@@ -38,6 +53,11 @@ void	add_env(t_list **lst, char *name, char *value, int end)
 	else
 		ft_lstadd_end(lst, ft_lstnew(elem, 0));
 }
+
+/*
+**	function that initiates the environment variables
+**	it create a t_list from the **env (a copy of it)
+*/
 
 void	init_env(t_list **lst, char **env)
 {
@@ -53,6 +73,14 @@ void	init_env(t_list **lst, char **env)
 		cpy_env++;
 	}
 }
+
+/*
+**	called from forkit function,
+**	needed to convert the list of t_env elements
+**	to an array of strings, to send it with the execve function.
+**	and this function add a NULL pointer at the end of the array,
+**	this array can be freed with the call of ft_free_strtab libft function.
+*/
 
 char	**env_to_tab(t_list *lst)
 {
@@ -71,6 +99,11 @@ char	**env_to_tab(t_list *lst)
 	env[i] = NULL;
 	return (env);
 }
+
+/*
+**	it frees all memory allocated in the heap created by add_env
+**	and frees the t_list element.
+*/
 
 void	free_env(t_list *lst)
 {

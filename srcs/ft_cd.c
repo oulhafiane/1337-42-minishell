@@ -12,7 +12,13 @@
 
 #include "minishell.h"
 
-char	*get_home(t_list *lst)
+/*
+**	called from ft_cd,
+**	it get the environment variable called $HOME
+**	from the t_list *lst that contains all t_env elements.
+*/
+
+static char	*get_home(t_list *lst)
 {
 	t_env	*env;
 
@@ -26,7 +32,14 @@ char	*get_home(t_list *lst)
 	return (NULL);
 }
 
-void	change_pwd(char *pwd, t_list **lst)
+/*
+**	this function called by ft_cd function,
+**	it's change the value of the environment variable
+**	$PWD or $OLDPWD given as parameter char *pwd,
+**	if this variable not found it creates a new one.
+*/
+
+static void	change_pwd(char *pwd, t_list **lst)
 {
 	t_list	*cpy;
 	t_env	*env;
@@ -50,7 +63,13 @@ void	change_pwd(char *pwd, t_list **lst)
 	free(new_home);
 }
 
-int		check_dir(char *home)
+/*
+**	called by ft_cd function,
+**	it checks if the string home given as parameter
+**	is a file or a directory and exist or not and it's permission.
+*/
+
+static int	check_dir(char *home)
 {
 	struct stat	st;
 	int			ret;
@@ -71,6 +90,13 @@ int		check_dir(char *home)
 	else
 		return (1);
 }
+
+/*
+**	a builtin command, that move the current location to another one,
+**	it changes the value of $PWD and $OLDPWD, and calls chdir() function,
+**	it checks if the new location exists and it's permission
+**	before it makes any change.
+*/
 
 void	ft_cd(char **args, t_list **env)
 {

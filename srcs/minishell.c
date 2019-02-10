@@ -21,7 +21,7 @@
 **	the parent waits the child to finish
 */
 
-void	forkit(char *full_path, char **cmds, t_list **env)
+static void	forkit(char *full_path, char **cmds, t_list **env)
 {
 	int		status;
 	pid_t	father;
@@ -46,7 +46,7 @@ void	forkit(char *full_path, char **cmds, t_list **env)
 **	otherwise, it prints an error msg.
 */
 
-void	exec_local(char **cmds, t_list **env)
+static void	exec_local(char **cmds, t_list **env)
 {
 	if (access(*cmds, F_OK) == 0)
 	{
@@ -66,7 +66,7 @@ void	exec_local(char **cmds, t_list **env)
 **	otherwise, it prints an error msg.
 */
 
-void	exec_cmd(char **cmds, char **path, t_list **env)
+void		exec_cmd(char **cmds, char **path, t_list **env)
 {
 	char	*full_path;
 	char	*error;
@@ -109,7 +109,7 @@ void	exec_cmd(char **cmds, char **path, t_list **env)
 **	free_strtab    : frees all strings (char**) returned by ft_strsplit_ws. 
 */
 
-void	minishell(t_list *lst, t_list **env)
+static void	minishell(t_list *lst, t_list **env)
 {
 	char	*cmd;
 	char	**cmds;

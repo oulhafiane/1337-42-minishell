@@ -12,6 +12,13 @@
 
 #include "minishell.h"
 
+/*
+**	this function called from exec_cmd,
+**	if the file not found or it's permission is denied,
+**	this function if the string error not null, the function prints
+**	the string error, otherwise it prints a msg Command not found...
+*/
+
 void	print_error(char *error, char *cmd)
 {
 	if (error != NULL)
